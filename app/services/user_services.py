@@ -2,16 +2,18 @@ import bcrypt
 from app.services.base import Base
 from app.db.models.models import Usuario
 from fastapi import HTTPException
-from app.db.schemas.user_schema import UserBase
+
 
 
 class UserServices(Base):
     def create_user(self, user_data: dict):
-        user_exist = self.get_user_by_cedula(user_data.cedula)
+        user_exist = self.db.query(Usuario).filter(Usuario.cedula == user_data.cedula).first()
 
         if user_exist:
             raise HTTPException(status_code=400, detail="User already exist, cedula is already registered")
         
+        if user_data.rol not in ['estudiante', 'administrador']:
+            raise HTTPException(status_code=400, detail="User role must be 'estudiante' or 'administrador'")
         
         user = Usuario(**user_data.dict())
         user.contraseña = bcrypt.hashpw(user.contraseña.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
