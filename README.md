@@ -63,7 +63,3 @@ Abre tu navegador web y accede a la siguiente URL:
 ## Contribuciones
 
 Si deseas contribuir al proyecto, crea un *fork* del repositorio, realiza tus cambios en una nueva rama y envía un *pull request*. Agradecemos cualquier mejora o corrección.
-
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
